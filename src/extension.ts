@@ -22,7 +22,6 @@ async function searchInSearch(): Promise<void> {
 	await vscode.commands.executeCommand("search.action.copyAll");
 	const projectPath = vscode.workspace.rootPath;
 	const clipBoardResult = await vscode.env.clipboard.readText();
-	let paths: string[] = [];
 
 	if (projectPath === undefined) { return; }
 
