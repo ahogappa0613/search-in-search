@@ -19,10 +19,14 @@ export function activate(context: vscode.ExtensionContext): void {
 export function deactivate() { }
 
 async function searchInSearch(): Promise<void> {
+	const oldclipBoardResult = await vscode.env.clipboard.readText();
+
 	await vscode.commands.executeCommand("search.action.copyAll");
-	const projectPath = vscode.workspace.rootPath;
 	const clipBoardResult = await vscode.env.clipboard.readText();
 
+	vscode.env.clipboard.writeText(oldclipBoardResult);
+
+	const projectPath = vscode.workspace.rootPath;
 	if (projectPath === undefined) { return; }
 
 	await vscode.commands.executeCommand("workbench.action.findInFiles", {
